@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Stats</title>
+</head>
+
+<body style="background-color:  #e5e7e9;">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <p class="navbar-brand"><b>Analyse Data</b> - Consommation d'alcool chez les étudiants</p>
+        </div>
+    </nav>
+
+    <form action="/trait/test" method="post">
+        <div class="row justify-content-center m-4">
+            <div class="col-4">
+                <label for="prenom" class="form-label">Prénom :</label>
+                <input name="prenom" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="row justify-content-center m-4">
+            <div class="col-2">
+                <label for="sex" class="form-label">Sexe :</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sex" id="sex" value="M" checked>
+                    <label class="form-check-label" for="sex">Homme</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sex" id="sex" value="F">
+                    <label class="form-check-label" for="sex">Femme</label>
+                </div>
+            </div>
+            <div class="col-2">
+                <label for="age" class="form-label">Age :</label>
+                <div class="form-check">
+                    <select class="form-select" aria-label="age" name="age">
+                        <option selected value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center m-4">
+            <div class="col-2">
+                <label for="famsize" class="form-label">Taille de la famille :</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="famsize" id="famsize_inf3" value="LE3" checked>
+                    <label class="form-check-label" for="famsize">
+                        Inférieur ou égal à 3
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="famsize" id="famsize_sup3" value="GT3">
+                    <label class="form-check-label" for="famsize">
+                        Supérieur à 3
+                    </label>
+                </div>
+            </div>
+            <div class="col-2">
+                <label for="pstatus" class="form-label">Statut des parents:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="pstatus" id="famsize_inf3" value="T" checked>
+                    <label class="form-check-label" for="pstatus">
+                        Séparé
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="pstatus" id="famsize_sup3" value="A">
+                    <label class="form-check-label" for="pstatus">
+                        Ensemble
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center m-4">
+            <div class="col-4">
+                <label for="medu" class="form-label">Niveau d'étude de la mère :</label>
+                <div class="form-check">
+                    <select class="form-select" aria-label="medu" name="medu">
+                        <option selected value="0">Aucun diplôme</option>
+                        <option value="1">Niveau BAC</option>
+                        <option value="2">Niveau BAC+2</option>
+                        <option value="3">Niveau BAC+3/4</option>
+                        <option value="4">Niveau BAC+5 et plus</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center m-4">
+            <div class="col-4">
+                <label for="fedu" class="form-label">Niveau d'étude du père :</label>
+                <div class="form-check">
+                    <select class="form-select" aria-label="fedu" name="fedu">
+                        <option selected value="0">Aucun diplôme</option>
+                        <option value="1">Niveau BAC</option>
+                        <option value="2">Niveau BAC+2</option>
+                        <option value="3">Niveau BAC+3/4</option>
+                        <option value="4">Niveau BAC+5 et plus</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center m-4">
+            <div class="col-4">
+                <label for="studytime" class="form-label">Temps d'étude le week-end :</label>
+                <div class="form-check">
+                    <select class="form-select" aria-label="studytime" name="studytime">
+                        <option selected value="1">1 heure</option>
+                        <option value="2">2 heures</option>
+                        <option value="3">3 heures</option>
+                        <option value="4">4 heures</option>
+                        <option value="5">5 heures</option>
+                        <option value="6">6 heures</option>
+                        <option value="7">7 heures</option>
+                        <option value="8">8 heures</option>
+                        <option value="9">9 heures</option>
+                        <option value="10">10 heures</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center m-4">
+            <div class="col-4">
+                <div class="col">
+                    <label for="activities" class="form-label">Activités extra-scolaire:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="activities" id="activities_yes" value="yes" checked>
+                        <label class="form-check-label" for="activities">
+                            Oui
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="activities" id="activities_no" value="no">
+                        <label class="form-check-label" for="activities">
+                            Non
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center m-4">
+            <div class="col-4">
+                <div class="col">
+                    <label for="internet" class="form-label">Accès à internet :</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="internet" id="internet_yes" value="yes" checked>
+                        <label class="form-check-label" for="internet">
+                            Oui
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="internet" id="internet_no" value="no">
+                        <label class="form-check-label" for="internet">
+                            Non
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center m-4">
+            <div class="col-4">
+                <label for="Dalc" class="form-label">Consommation d'alcool la semaine :</label>
+                <div class="form-check">
+                    <select class="form-select" aria-label="Dalc" name="Dalc">
+                        <option selected value="1">Vraiment peu</option>
+                        <option value="2">Un peu</option>
+                        <option value="3">Pas mal</option>
+                        <option value="4">Beaucoup</option>
+                        <option value="5">Une cuve</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center m-4">
+            <div class="col-4">
+                <label for="Walc" class="form-label">Consommation d'alcool la semaine :</label>
+                <div class="form-check">
+                    <select class="form-select" aria-label="Walc" name="Walc">
+                        <option selected value="1">Vraiment peu</option>
+                        <option value="2">Un peu</option>
+                        <option value="3">Pas mal</option>
+                        <option value="4">Beaucoup</option>
+                        <option value="5">Une cuve</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <button class="btn btn-success" type="submit">Valider</button>
+            </div>
+        </div>
+    </form>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+    integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+</html>

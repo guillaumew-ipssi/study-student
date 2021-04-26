@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Stats</title>
+</head>
+
+<body style="background-color:  #e5e7e9;">
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container-fluid">
+            <p class="navbar-brand"><b>Analyse Data</b> - Consommation d'alcool chez les étudiants</p>
+        </div>
+    </nav>
+
+    <div class="row mt-4">
+        <div class="col">
+            <h3 class="text-center">Merci {{ prenom }} d'avoir fait le test ! </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h4 class="text-center">Regardons ces résultats !</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card m-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-title text-center">Les étudiants/étudiantes qui ont le même âge que toi, c'est à dire <b>{{ age }}</b> ans, représente <b>{{ percentage_age|round(2) }}% </b> de l'étude.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            {% if sex == 'M' %}
+                                <p class="card-title text-center">Les élèves masculins de <b>{{ age }}</b> ans représentent <b>{{ percentage_age_sex|round(2) }}%</b>.</p>
+                            {% else %}
+                                <p class="card-title text-center">Les élèves féminines de <b>{{ age }}</b> ans représentent <b>{{ percentage_age_sex|round(2) }}%</b>.</p>
+                            {% endif %}
+                        </div>
+                    </div>            
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="card m-2">
+                <div class="card-body">
+                    <p class="card-title text-center fw-bold">Moyenne de consommation d'alcool (semaine et week-end) selon le nombre de personnes au sein de la famille pour les étudiant(e)s de {{ age }} ans</p>            
+                    <canvas id="famsizeChart" width="150" height="75"></canvas>         
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card m-2">
+                <div class="card-body">
+                    <p class="card-title text-center fw-bold">Moyenne de consommation d'alcool (semaine et week-end) selon la composition familiale pour les étudiant(e)s de {{ age }} ans</p>            
+                    <canvas id="pstatusChart" width="150" height="68.5"></canvas>
+                </div>
+                <p class="text-center">Le coefficient de votre consommation est de <b>{{ pstatus_form|round(2) }}</b></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+    integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+    integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+<script>
+    var pstatus_form = '{{ pstatus_form }}'
+    var pstatus_to_compare_m = '{{ pstatus_to_compare_m }}'
+    var pstatus_to_compare_f = '{{ pstatus_to_compare_f }}'
+    
+    pstatus_to_compare_m = pstatus_to_compare_m.replace('[', '');
+    pstatus_to_compare_m = pstatus_to_compare_m.replace(']', '');
+    pstatus_to_compare_m = pstatus_to_compare_m.split(',');
+
+    console.log(pstatus_to_compare_m)
+    
+    pstatus_to_compare_f = pstatus_to_compare_f.replace('[', '');
+    pstatus_to_compare_f = pstatus_to_compare_f.replace(']', '');
+    pstatus_to_compare_f = pstatus_to_compare_f.split(',');
+    
+    var ctx = document.getElementById('pstatusChart');
+
+    data = {
+        datasets: [{
+            data: pstatus_to_compare_f,
+            backgroundColor: [
+                    'rgba(  252, 3, 14, 0.5 )',
+                ]
+        },{
+            data: pstatus_to_compare_m,
+            backgroundColor: [
+                    'rgba( 3, 26, 252, 0.5 )',
+                ]
+        }],
+        labels: ['15 ans', '16 ans', '17 ans', '18 ans', '19 ans', '20 ans', '21 ans', '22 ans'],
+    };
+
+var pstatusChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: {
+        legend: {
+            position: 'bottom',
+            display: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 5,
+                },
+            }]
+        },
+        responsive: true
+    }
+});    
+</script>
+
+<script>
+    var famsize_form = '{{ famsize_form }}'
+    var famsize_to_compare = '{{ famsize_to_compare }}'
+    
+    famsize_to_compare = famsize_to_compare.replace('[', '');
+    famsize_to_compare = famsize_to_compare.replace(']', '');
+    famsize_to_compare = famsize_to_compare.split(',');
+    famsize_to_compare.unshift(famsize_form);
+    
+    var ctx = document.getElementById('famsizeChart');
+
+    data = {
+        datasets: [{
+            data: famsize_to_compare,
+            backgroundColor: [
+                    'rgb( 192, 57, 43  )',
+                    'rgb( 128, 139, 150 )',
+                    'rgb( 128, 139, 150 )',
+                    'rgb( 128, 139, 150 )',
+                    'rgb( 128, 139, 150 )',
+                    'rgb( 128, 139, 150 )',
+                    'rgb( 128, 139, 150 )',
+                    'rgb( 128, 139, 150 )',
+                    'rgb( 128, 139, 150 )'
+                ]
+        }],
+        labels: ['Vous', '15 ans', '16 ans', '17 ans', '18 ans', '19 ans', '20 ans', '21 ans', '22 ans'],
+    };
+
+    var myBarChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+        legend: {
+            display: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    max: 5
+                }
+            }]
+    },
+        responsive: true
+    }
+});
+
+    
+</script>
+
+</html>
+
