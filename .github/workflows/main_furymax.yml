@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'furymax'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_b9b90e1413814812ba7fda327635453f }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_a50b2d77e7844c48b4edeb08b56173f8 }}
